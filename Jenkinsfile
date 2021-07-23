@@ -1,6 +1,8 @@
 pipeline {
           agent { dockerfile true }
-          
+          options {
+		timestamps ()
+	}
        stages{
           stage('Get source code'){
            steps{git 'https://github.com/Obovtunov/word-cloud-generator.git'}
@@ -23,6 +25,7 @@ pipeline {
                go get github.com/GeertJohan/go.rice/rice
                go get github.com/OBovtunov/word-cloud-generator/wordyapi
                go get github.com/gorilla/mux
+               sed -i 's/1.DEVELOPMENT/1.$BUILD_NUMBER/g' ./rice-box.go
                GOOS=linux GOARCH=amd64 go build -o ./artifacts/word-cloud-generator -v .
                gzip -c ./artifacts/word-cloud-generator >./artifacts/word-cloud-generator.gz
                rm ./artifacts/word-cloud-generator
@@ -31,8 +34,8 @@ pipeline {
            }
            stage('Upload artifacts'){
             steps{
-                nexusArtifactUploader artifacts: [[artifactId: 'word-cloud-generator', classifier: '', file: 'artifacts/word-cloud-generator', type: 'gz']], credentialsId: 'nexus-creds', groupId: 'web-app-pipeline', nexusUrl: 'nexus:8081', nexusVersion: 'nexus3', protocol: 'http', repository: 'word-cloud-generator'
-            }
-        }    
+                nexusArtifactUploader artifacts: [[artifactId: 'word-cloud-generator', classifier: '', file: 'artifacts/word-cloud-generator', type: 'gz']], credentialsId: 'nexus-creds', groupId: 'web-app-pipeline', nexusUrl: 'nexus:8081', nexusVersion: 'nexus3', protocol: 'http', repository: 'word-cloud-generator',   version: '1.$BUILD_NUMBER'
+                 }
+           }    
         }
 }
