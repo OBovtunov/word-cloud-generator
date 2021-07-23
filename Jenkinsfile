@@ -30,7 +30,8 @@ pipeline {
                GOOS=linux GOARCH=amd64 go build -o ./artifacts/word-cloud-generator -v .
                gzip -c ./artifacts/word-cloud-generator >./artifacts/word-cloud-generator.gz
                rm ./artifacts/word-cloud-generator
-               mv ./artifacts/word-cloud-generator.gz ./artifacts/word-cloud-generator '''
+               mv ./artifacts/word-cloud-generator.gz ./artifacts/word-cloud-generator
+	       ls ./artifacts/'''
                  }
            }
            stage('Upload artifacts'){
