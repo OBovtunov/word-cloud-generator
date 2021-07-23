@@ -3,12 +3,10 @@ pipeline {
           
        stages{
           stage('Get source code'){
-            steps{git 'https://github.com/Obovtunov/word-cloud-generator.git'
-            }
+           steps{git 'https://github.com/Obovtunov/word-cloud-generator.git'}
           }
-       
-           stage('Using Make tests'){
-            steps{
+          stage('Make tests'){
+           steps{
                 sh '''export GOPATH=$WORKSPACE
                 export PATH="$PATH:$(go env GOPATH)/bin"
                 go get github.com/GeertJohan/go.rice/rice
@@ -18,8 +16,8 @@ pipeline {
                 make test'''
                 }
             }
-           stage('Using Make tests'){
-            steps{
+          stage('Build'){
+           steps{
                sh ''' go get github.com/tools/godep
                go get github.com/smartystreets/goconvey
                go get github.com/GeertJohan/go.rice/rice
