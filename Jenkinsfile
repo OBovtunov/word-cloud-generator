@@ -29,5 +29,10 @@ pipeline {
                mv ./artifacts/word-cloud-generator.gz ./artifacts/word-cloud-generator '''
                  }
            }
-  }
+           stage('Upload artifacts'){
+            steps{
+                nexusArtifactUploader artifacts: [[artifactId: 'word-cloud-generator', classifier: '', file: 'artifacts/word-cloud-generator', type: 'gz']], credentialsId: 'nexus-creds', groupId: 'web-app-pipeline', nexusUrl: 'nexus:8081', nexusVersion: 'nexus3', protocol: 'http', repository: 'word-cloud-generator'
+            }
+        }    
+        }
 }
