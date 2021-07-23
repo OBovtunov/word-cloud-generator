@@ -1,8 +1,7 @@
 pipeline {
-      options {
-		timestamps ()
-	      }
-          agent { dockerfile true }
+        agent { dockerfile true }
+	
+	
         stages{
           stage('Get source code'){
            steps{git 'https://github.com/Obovtunov/word-cloud-generator.git'}
