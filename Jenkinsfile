@@ -26,10 +26,10 @@ pipeline {
                go get github.com/GeertJohan/go.rice/rice
                go get github.com/OBovtunov/word-cloud-generator/wordyapi
                go get github.com/gorilla/mux
+	       rm -f artifacts/*
                sed -i 's/1.DEVELOPMENT/1.$BUILD_NUMBER/g' ./rice-box.go
                GOOS=linux GOARCH=amd64 go build -o ./artifacts/word-cloud-generator -v .
-	       rm -f artifacts/*
-               gzip -c ./artifacts/word-cloud-generator >./artifacts/word-cloud-generator.gz
+	       gzip -c ./artifacts/word-cloud-generator >./artifacts/word-cloud-generator.gz
                rm ./artifacts/word-cloud-generator
                mv ./artifacts/word-cloud-generator.gz ./artifacts/word-cloud-generator
 	       ls ./artifacts/'''
