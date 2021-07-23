@@ -31,5 +31,5 @@ pipeline {
                mv ./artifacts/word-cloud-generator.gz ./artifacts/word-cloud-generator '''
                  }
            }
- }
+  }
 }
