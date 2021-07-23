@@ -19,7 +19,9 @@ pipeline {
             }
           stage('Build'){
            steps{
-               sh ''' go get github.com/tools/godep
+               sh ''' export GOPATH=$WORKSPACE
+               export PATH="$PATH:$(go env GOPATH)/bin"
+	       go get github.com/tools/godep
                go get github.com/smartystreets/goconvey
                go get github.com/GeertJohan/go.rice/rice
                go get github.com/OBovtunov/word-cloud-generator/wordyapi
