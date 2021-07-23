@@ -40,7 +40,7 @@ pipeline {
                 nexusArtifactUploader artifacts: [[artifactId: 'word-cloud-generator', classifier: '', file: 'artifacts/word-cloud-generator', type: 'gz']], credentialsId: '7adeda37-a6d0-4cb6-a8f2-71a826cfb3b1', groupId: '1', nexusUrl: 'nexus:8081', nexusVersion: 'nexus3', protocol: 'http', repository: 'word-cloud-builds', version: '1.$BUILD_NUMBER'                 }
            }
         
-	agent { STAGE_TEST/dockerfile true }
+	agent { dockerfile true }
 	        stage('Test') {
                        steps {
                            sh 'node --version'
