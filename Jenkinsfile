@@ -12,7 +12,7 @@ pipeline {
                 sh '''export GOPATH=$WORKSPACE
                 export PATH="$PATH:$(go env GOPATH)/bin"
                 go get github.com/GeertJohan/go.rice/rice
-                go get github.com/oshagova/word-cloud-generator/wordyapi
+                go get github.com/Obovtunov/word-cloud-generator/wordyapi
                 go get github.com/gorilla/mux
                 make lint
                 make test'''
