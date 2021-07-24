@@ -39,9 +39,10 @@ pipeline {
        	   stage('TEST'){
 		   agent{
 			dockerfile {
-                        filename 'Dockerfile1'
-			            }  
-		         }
+					dir 'stage'
+					filename 'Dockerfile'
+			            }
+		         }  
 	           steps {
                            sh 'node --version'
 		        }
