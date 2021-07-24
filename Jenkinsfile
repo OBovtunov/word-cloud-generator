@@ -41,7 +41,7 @@ pipeline {
 			   docker.dockerfile(dir:'stage')
 		         }
 		   steps {
-                           echo 'test'
+                           sh 'node --version'
 		         }
 	   }
    }
