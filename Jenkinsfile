@@ -38,7 +38,7 @@ pipeline {
 		
        	   stage('TEST'){
 		 agent {
-			 docker.dockerfile(dir: '.stage')
+			 docker.dockerfile(dir: 'word-cloud-generator/stage')
 			}
 	           steps {
                            sh 'node --version'
