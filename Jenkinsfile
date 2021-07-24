@@ -1,7 +1,6 @@
 pipeline {
         agent { dockerfile true }
-	
-	
+		
         stages{
           stage('Make tests'){
            steps{
@@ -38,13 +37,13 @@ pipeline {
                  }
 		
        	   stage('TEST'){
-		 dir('STAGE_TEST'){ 
-                 agent {dockerfile true}
-			   {   
-                  steps {
+		 agent {
+			 dockerfile {
+                          filename 'Dockerfile'
+				 dir 'STAGE_TEST'}
+		         }
+	           steps {
                            sh 'node --version'
 		        }
-		  }
-            }
-      }
+   }
 }
