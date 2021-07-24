@@ -41,6 +41,7 @@ pipeline {
 			dockerfile {
                         filename 'Dockerfile1'
 			            }  
+		         }
 	           steps {
                            sh 'node --version'
 		        }
