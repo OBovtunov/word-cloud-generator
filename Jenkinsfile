@@ -22,13 +22,11 @@ pipeline {
                go get github.com/GeertJohan/go.rice/rice
                go get github.com/OBovtunov/word-cloud-generator/wordyapi
                go get github.com/gorilla/mux
-	       rm -f artifacts/*
-               sed -i 's/1.DEVELOPMENT/1.$BUILD_NUMBER/g' ./rice-box.go
+	       sed -i 's/1.DEVELOPMENT/1.$BUILD_NUMBER/g' ./rice-box.go
                GOOS=linux GOARCH=amd64 go build -o ./artifacts/word-cloud-generator -v .
 	       gzip -c ./artifacts/word-cloud-generator >./artifacts/word-cloud-generator.gz
                rm ./artifacts/word-cloud-generator
-               mv ./artifacts/word-cloud-generator.gz ./artifacts/word-cloud-generator
-	       ls ./artifacts/'''
+               mv ./artifacts/word-cloud-generator.gz ./artifacts/word-cloud-generator'''
                  }
            }
            stage('Upload artifacts'){
@@ -37,7 +35,12 @@ pipeline {
                  }
 		
        	   stage('TEST'){
-		   agent{dockerfile true}
+		   agent{
+		   dockerfile {
+                       filename 'Dockerfile'
+                       dir 'stage'
+		               }
+		        }
 		   steps {
                            echo 'test'
 		         }
