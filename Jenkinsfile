@@ -36,7 +36,7 @@ pipeline {
                 nexusArtifactUploader artifacts: [[artifactId: 'word-cloud-generator', classifier: '', file: 'artifacts/word-cloud-generator', type: 'gz']], credentialsId: '7adeda37-a6d0-4cb6-a8f2-71a826cfb3b1', groupId: '1', nexusUrl: 'nexus:8081', nexusVersion: 'nexus3', protocol: 'http', repository: 'word-cloud-builds', version: '1.$BUILD_NUMBER'                 }
                  }
 		
-       	   stage('TEST'){
+       	   stage('Create container,download,start aplication'){
 		   agent{
 			   dockerfile {
 				   dir 'stage'
@@ -49,9 +49,17 @@ pipeline {
 			curl -X GET -u downloader:downloader "http://nexus:8081/repository/word-cloud-builds/1/word-cloud-generator/1.$BUILD_NUMBER/word-cloud-generator-1.$BUILD_NUMBER.gz" -o /opt/wordcloud/word-cloud-generator.gz
                         gunzip -f /opt/wordcloud/word-cloud-generator.gz
                         chmod +x /opt/wordcloud/word-cloud-generator
-			ExecStart=/opt/wordcloud/word-cloud-generator
-                        sleep 1000 '''
+			ExecStart=/opt/wordcloud/word-cloud-generator'''
 		         }
+           stage ('Running  tests') {
+		   steps {
+			sh '''res=`curl -s -H "Content-Type: application/json" -d '{"text":"test"}' http://127.0.0.1:8888/version | jq '. | length'`
+                          if [ "1" != "$res" ]; then exit 99; 
+                           fi
+                           res=`curl -s -H "Content-Type: application/json" -d '{"text":"test"}' http://127.0.0.1:8888/api | jq '. | length'`
+                           if [ "7" != "$res" ]; then exit 99;
+                            fi
+'''}
 	   }
    }
 }
