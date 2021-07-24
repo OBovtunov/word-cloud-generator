@@ -1,5 +1,3 @@
-FROM node:7-alpine
-
-
-#FROM alpine:latest
-#RUN apk update
+FROM alpine:latest
+RUN apk update && apk upgrade && apk add --no-cache curl
+RUN mkdir /opt/wordcloud
