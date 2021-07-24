@@ -41,7 +41,8 @@ pipeline {
 			   dockerfile {
 				   dir 'stage'
 			           filename 'Dockerfile'
-				   args '--network vagrant_work'
+				   args '--network vagrant_work -p 88:8888'
+				   sleep 300
 			              }
 		         }
 		   steps {
