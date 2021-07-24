@@ -44,7 +44,7 @@ pipeline {
 			            }
 		         }  
 	           steps {
-                           sh 'node --version'
+                           echo 'test'
 		        }
 	   }
    }
