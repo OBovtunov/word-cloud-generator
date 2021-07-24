@@ -38,8 +38,9 @@ pipeline {
 		
        	   stage('TEST'){
 		   agent{
-			   docker.dockerfile(dir:'stage',
-			    additionalBuildArgs:'--network vagrant_work')
+			   dockerfile{dir:'stage'
+			    additionalBuildArgs:'--build-arg version=1.0'
+				      args '--network vagrant_work'}	      
 		         }
 		   steps {
                           sh '''rm -f artifacts/*
