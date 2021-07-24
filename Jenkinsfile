@@ -3,10 +3,7 @@ pipeline {
 	
 	
         stages{
-          stage('Get source code'){
-           steps{git 'https://github.com/Obovtunov/word-cloud-generator.git'}
-          }
-	  stage('Make tests'){
+          stage('Make tests'){
            steps{
                 sh '''export GOPATH=$WORKSPACE
                 export PATH="$PATH:$(go env GOPATH)/bin"
@@ -42,11 +39,9 @@ pipeline {
 		
        	   stage('TEST'){
 	      agent {dockerfile true}
-                 stage('Test') {
-                       steps {
+                  steps {
                            sh 'node --version'
-                            }
-                        }
-	   }
+                         }
+                  }
       }
 }
