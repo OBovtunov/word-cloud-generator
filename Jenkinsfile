@@ -37,15 +37,10 @@ pipeline {
                  }
 		
        	   stage('TEST'){
-		   agent{
-			dockerfile {
-					dir 'stage'
-					filename 'Dockerfile'
-			            }
-		         }  
-	           steps {
+		   agent{dockerfile true}
+		   steps {
                            echo 'test'
-		        }
+		         }
 	   }
    }
 }
