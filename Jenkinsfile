@@ -38,11 +38,8 @@ pipeline {
 		
        	   stage('TEST'){
 		   agent{
-		   dockerfile {
-                       filename 'Dockerfile'
-                       dir 'stage'
-		               }
-		        }
+			   docker.dockerfile(dir:'stage')
+		         }
 		   steps {
                            echo 'test'
 		         }
