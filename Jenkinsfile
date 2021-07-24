@@ -38,7 +38,8 @@ pipeline {
 		
        	   stage('TEST'){
 		   agent{
-			   dockerfile{dir:'stage'
+			   dockerfile {
+		            dir 'stage'
 			    additionalBuildArgs:'--build-arg version=1.0'
 				      args '--network vagrant_work'}	      
 		         }
