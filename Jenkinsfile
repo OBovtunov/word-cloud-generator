@@ -44,7 +44,7 @@ pipeline {
 			   dockerfile {
 				   dir 'stage'
 			           filename 'Dockerfile'
-				   args '--network vagrant_work -n stage -p 88:8888'
+				   args '--network vagrant_work --n stage -p 88:8888'
 				      }
 		         }
 		   steps {
