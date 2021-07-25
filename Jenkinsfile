@@ -50,7 +50,7 @@ pipeline {
                         gunzip -f /opt/wordcloud/word-cloud-generator.gz
                         chmod +x /opt/wordcloud/word-cloud-generator
 			/opt/wordcloud/word-cloud-generator &
-			sleep 1000'''
+			sleep 60'''
 		         }
 	   }
            stage ('Running  tests') {
