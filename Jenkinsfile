@@ -49,7 +49,7 @@ pipeline {
 			curl -X GET -u downloader:downloader "http://nexus:8081/repository/word-cloud-builds/1/word-cloud-generator/1.$BUILD_NUMBER/word-cloud-generator-1.$BUILD_NUMBER.gz" -o /opt/wordcloud/word-cloud-generator.gz
                         gunzip -f /opt/wordcloud/word-cloud-generator.gz
                         chmod +x /opt/wordcloud/word-cloud-generator
-			/opt/wordcloud/word-cloud-generator'''
+			/opt/wordcloud/word-cloud-generator &'''
 		         }
 	   }
            stage ('Running  tests') {
