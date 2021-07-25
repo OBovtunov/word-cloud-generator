@@ -44,7 +44,7 @@ pipeline {
 			   dockerfile {
 				   dir 'stage'
 			           filename 'Dockerfile'
-				   args '--network vagrant_work -p 88:8888'
+				   args '--network vagrant_work -n stage -p 88:8888'
 				      }
 		         }
 		   steps {
@@ -54,7 +54,7 @@ pipeline {
                         chmod +x /opt/wordcloud/word-cloud-generator
 			/opt/wordcloud/word-cloud-generator &
 			sleep 3
-			res=`curl -s -H "Content-Type: application/json" -d '{"text":"test"}' http://localhost:8888/version | jq '. | length'`
+			res=`curl -s -H "Content-Type: application/json" -d '{"text":"test"}' http://stage:8888/version | jq '. | length'`
                         if [ "1" != "$res" ]; then exit 99;
                              fi
 	                 res=`curl -s -H "Content-Type: application/json" -d '{"text":"ths is a really really really important thing this is"}' http://localhost:8888/api | jq '. | length'`
