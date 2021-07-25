@@ -1,6 +1,8 @@
 pipeline {
-        agent { dockerfile true }
-		
+        agent{
+	      dockerfile {filename 'Dockerfile'
+			   args '--network vagrant_work'
+			 }
         stages{
           stage('Make tests'){
            steps{
@@ -50,7 +52,7 @@ pipeline {
                         gunzip -f /opt/wordcloud/word-cloud-generator.gz
                         chmod +x /opt/wordcloud/word-cloud-generator
 			/opt/wordcloud/word-cloud-generator &
-			sleep 60'''
+			sleep 10'''
 		         }
 	   }
            stage ('Running  tests') {
