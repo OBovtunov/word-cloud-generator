@@ -55,9 +55,8 @@ pipeline {
 			/opt/wordcloud/word-cloud-generator &
 			sleep 10'''
 		         }
-	   }
-           stage ('Running  tests') {
-		   steps {
+	   
+                   steps {
 			sh '''res=`curl -s -H "Content-Type: application/json" -d '{"text":"test"}' http://localhost:8888/version | jq '. | length'`
                           echo $res
 			  if [ "1" != "$res" ]; then exit 99;
@@ -68,6 +67,6 @@ pipeline {
                                 fi
 	        		  sleep 100'''
 		          }
-	   }
+	   }	   
    }
 }
