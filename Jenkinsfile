@@ -53,20 +53,18 @@ pipeline {
                         gunzip -f /opt/wordcloud/word-cloud-generator.gz
                         chmod +x /opt/wordcloud/word-cloud-generator
 			/opt/wordcloud/word-cloud-generator &
-			sleep 10'''
-		         }
-	   
-                   steps {
-			sh '''res=`curl -s -H "Content-Type: application/json" -d '{"text":"test"}' http://localhost:8888/version | jq '. | length'`
-                          echo $res
-			  if [ "1" != "$res" ]; then exit 99;
+			sleep 3
+			res=`curl -s -H "Content-Type: application/json" -d '{"text":"test"}' http://localhost:8888/version | jq '. | length'`
+                        echo $res
+			if [ "1" != "$res" ]; then exit 99;
                              fi
-	                          res=`curl -s -H "Content-Type: application/json" -d '{"text":"ths is a really really really important thing this is"}' http://localhost:8888/api | jq '. | length'`
-	                         echo $res
-			   	 if [ "7" != "$res" ]; then exit 99;
-                                fi
-	        		  sleep 100'''
-		          }
+	                 res=`curl -s -H "Content-Type: application/json" -d '{"text":"ths is a really really really important thing this is"}' http://localhost:8888/api | jq '. | length'`
+	                 echo $res
+			 if [ "7" != "$res" ]; then exit 99;
+                             fi
+	        	    '''
+		         }
+         
 	   }	   
    }
 }
