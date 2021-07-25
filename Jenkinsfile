@@ -3,6 +3,7 @@ pipeline {
 	      dockerfile {filename 'Dockerfile'
 			   args '--network vagrant_work'
 			 }
+        	}
         stages{
           stage('Make tests'){
            steps{
