@@ -1,7 +1,7 @@
 pipeline {
         agent{
 	      dockerfile {filename 'Dockerfile'
-			   args '--network vagrant_work'
+			   args '--network work'
 			 }
         	}
         stages{
@@ -44,7 +44,7 @@ pipeline {
 			   dockerfile {
 				   dir 'stage'
 			           filename 'Dockerfile'
-				   args '--network vagrant_work --name stage -p 88:8888'
+				   args '--network work --name stage -p 88:8888'
 				      }
 		         }
 		   steps {
