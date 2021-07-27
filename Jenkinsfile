@@ -4,6 +4,8 @@ pipeline {
 			   args '--network work'
 			 }
         	}
+	options {
+		timestamps ()
         stages{
           stage('Make tests'){
            steps{
