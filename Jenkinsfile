@@ -6,6 +6,7 @@ pipeline {
         	}
 	options {
 		timestamps ()
+	}
         stages{
           stage('Make tests'){
            steps{
